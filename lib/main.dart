@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:four_loyalty/ui/login_page.dart';
+import 'package:four_loyalty/ui/login/login_page.dart';
 
 void main() {
   runApp(const MyApp());

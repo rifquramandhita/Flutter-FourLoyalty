@@ -1,9 +1,11 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:four_loyalty/data/const.dart';
+import 'package:four_loyalty/const.dart';
 import 'package:four_loyalty/data/preference/share_preference.dart';
 import 'package:four_loyalty/data/resource/auth_resource.dart';
+import 'package:four_loyalty/helper/dialog_helper.dart';
+import 'package:four_loyalty/helper/global_helper.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -28,19 +30,18 @@ class _LoginPageState extends State<LoginPage> {
       final token = await SharePreference.getString(Const.PREF_USER_TOKEN);
       log(token ?? '');
     } else {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text("Failed"),
-          content: Text(response.message),
-          actions: [
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("CLose"))
-          ],
-        ),
+      DialogHelper.showCustomDialog(
+        context,
+        "Failed",
+        response.message,
+        Icons.error,
+        [
+          ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("CLose"))
+        ],
       );
     }
 
@@ -58,10 +59,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context)
-        .textTheme
-        .apply(displayColor: Theme.of(context).colorScheme.onSurface);
-
     return Scaffold(
       body: SafeArea(
         child: (isLoading)
@@ -80,7 +77,9 @@ class _LoginPageState extends State<LoginPage> {
                     child: Wrap(
                       alignment: WrapAlignment.center,
                       children: [
-                        Text("Login", style: textTheme.headlineLarge),
+                        Text("Login",
+                            style:
+                                GlobalHelper.getTheme(context).headlineLarge),
                         TextFormField(
                           controller: _emailC,
                           decoration: InputDecoration(

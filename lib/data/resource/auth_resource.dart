@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:four_loyalty/data/const.dart';
+import 'package:four_loyalty/const.dart';
 import 'package:four_loyalty/data/response/login_response.dart';
 import 'package:http/http.dart';
 
