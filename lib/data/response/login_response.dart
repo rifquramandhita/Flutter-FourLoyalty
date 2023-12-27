@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:four_loyalty/data/response/base_response.dart';
 
 class LoginResponse extends BaseResponse {
@@ -9,7 +11,9 @@ class LoginResponse extends BaseResponse {
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
     return LoginResponse(
         success: json['success'],
-        message: json['message'],
+        message: (json['message'] is Map)
+            ? jsonEncode(json['message'])
+            : json['message'],
         token: json['token']);
   }
 }
