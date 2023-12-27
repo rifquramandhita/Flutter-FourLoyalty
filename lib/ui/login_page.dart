@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:four_loyalty/data/const.dart';
+import 'package:four_loyalty/data/preference/share_preference.dart';
 import 'package:four_loyalty/data/resource/auth_resource.dart';
 
 class LoginPage extends StatefulWidget {
@@ -19,20 +23,27 @@ class _LoginPageState extends State<LoginPage> {
       isLoading = true;
     });
     final response = await AuthResource.login(_emailC.text, _passwordC.text);
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text((response.success) ? "Success" : "Failed"),
-        content: Text((response.success) ? "Success login" : response.message),
-        actions: [
-          ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text("CLose"))
-        ],
-      ),
-    );
+    if (response.success) {
+      SharePreference.setString(Const.PREF_USER_TOKEN, response.token!);
+      final token = await SharePreference.getString(Const.PREF_USER_TOKEN);
+      log(token ?? '');
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text("Failed"),
+          content: Text(response.message),
+          actions: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("CLose"))
+          ],
+        ),
+      );
+    }
+
     setState(() {
       isLoading = false;
     });
