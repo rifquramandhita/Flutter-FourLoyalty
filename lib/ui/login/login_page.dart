@@ -1,11 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:four_loyalty/const.dart';
 import 'package:four_loyalty/data/preference/share_preference.dart';
 import 'package:four_loyalty/data/resource/auth_resource.dart';
 import 'package:four_loyalty/helper/dialog_helper.dart';
 import 'package:four_loyalty/helper/global_helper.dart';
+import 'package:four_loyalty/ui/home/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -27,8 +26,11 @@ class _LoginPageState extends State<LoginPage> {
     final response = await AuthResource.login(_emailC.text, _passwordC.text);
     if (response.success) {
       SharePreference.setString(Const.PREF_USER_TOKEN, response.token!);
-      final token = await SharePreference.getString(Const.PREF_USER_TOKEN);
-      log(token ?? '');
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Home_page(),
+          ));
     } else {
       DialogHelper.showCustomDialog(
         context,
@@ -50,11 +52,30 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
+  void isLogined() async {
+    setState(() {
+      isLoading = true;
+    });
+    final token = await SharePreference.getString(Const.PREF_USER_TOKEN);
+    if (token != null){
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Home_page(),
+          ));
+    } else{
+      setState(() {
+        isLoading = false;
+      });
+    }
+
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    isLoading = false;
+    isLogined();
   }
 
   @override
