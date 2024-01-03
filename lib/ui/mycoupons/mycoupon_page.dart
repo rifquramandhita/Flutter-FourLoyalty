@@ -4,6 +4,7 @@ import 'package:four_loyalty/data/model/usercoupon_model.dart';
 import 'package:four_loyalty/data/resource/user_resource.dart';
 import 'package:four_loyalty/data/resource/usercoupon_resource.dart';
 import 'package:four_loyalty/helper/global_helper.dart';
+import 'package:four_loyalty/ui/component/loading_component.dart';
 import 'package:four_loyalty/ui/mycoupons/component/mycoupon_card.dart';
 import 'package:four_loyalty/ui/mycoupons/component/mypoint_card.dart';
 
@@ -53,12 +54,7 @@ class _MyCoupons_pageState extends State<MyCoupons_page> {
     return Scaffold(
       body: SafeArea(
           child: (isLoading)
-              ? Center(
-                  child: SizedBox(
-                      width: 100,
-                      height: 100,
-                      child: CircularProgressIndicator()),
-                )
+              ? Loading_component()
               : SingleChildScrollView(
                   child: Stack(
                     children: [

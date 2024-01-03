@@ -4,6 +4,7 @@ import 'package:four_loyalty/data/preference/share_preference.dart';
 import 'package:four_loyalty/data/resource/auth_resource.dart';
 import 'package:four_loyalty/helper/dialog_helper.dart';
 import 'package:four_loyalty/helper/global_helper.dart';
+import 'package:four_loyalty/ui/component/loading_component.dart';
 import 'package:four_loyalty/ui/home/home_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -83,13 +84,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: SafeArea(
         child: (isLoading)
-            ? Center(
-                child: SizedBox(
-                  height: 200,
-                  width: 200,
-                  child: CircularProgressIndicator(),
-                ),
-              )
+            ? Loading_component()
             : Center(
                 child: Card(
                   margin: EdgeInsets.all(20),
