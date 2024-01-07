@@ -6,12 +6,14 @@ class SearchCoupon_card extends StatelessWidget {
   final title;
   final imgPath;
   final isClaimed;
+  final claimBOnPress;
 
   const SearchCoupon_card(
       {super.key,
       required this.title,
       required this.imgPath,
-      required this.isClaimed});
+      required this.isClaimed,
+      this.claimBOnPress});
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +61,7 @@ class SearchCoupon_card extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     ElevatedButton(
-                        onPressed: (isClaimed == '1') ? null : () {},
+                        onPressed: (isClaimed == '1') ? null : claimBOnPress,
                         child: Text((isClaimed == '1') ? "Claimed" : "Claim"))
                   ],
                 )

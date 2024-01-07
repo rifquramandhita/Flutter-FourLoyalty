@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:four_loyalty/data/model/coupon_model.dart';
 import 'package:four_loyalty/data/resource/coupon_resource.dart';
+import 'package:four_loyalty/data/resource/usercoupon_resource.dart';
+import 'package:four_loyalty/data/response/base_response.dart';
+import 'package:four_loyalty/helper/dialog_helper.dart';
 import 'package:four_loyalty/helper/global_helper.dart';
 import 'package:four_loyalty/ui/component/loading_component.dart';
 import 'package:four_loyalty/ui/searchcoupons/component/searchcoupon_card.dart';
@@ -28,9 +31,34 @@ class _SearchCoupons_pageState extends State<SearchCoupons_page> {
     });
   }
 
+  void claimCoupon(String couponId) async {
+    setState(() {
+      isLoading = true;
+    });
+    late Base_response response;
+    await Future.wait([postClaim(couponId).then((value) => response = value)]);
+    if (response.success == true) {
+      getData();
+    } else {
+      Dialog_helper.showCustomDialog(
+          context, "Failed", response.message, Icons.error, [
+        TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text("Close"))
+      ]);
+    }
+  }
+
   Future getAllCoupon() async {
     final response = await Coupon_resource.fetchAll();
     listCoupon = response.data;
+  }
+
+  Future<Base_response> postClaim(String couponId) async {
+    final response = await UserCoupon_resource.claim(couponId);
+    return response;
   }
 
   @override
@@ -64,6 +92,9 @@ class _SearchCoupons_pageState extends State<SearchCoupons_page> {
                           title: coupon.title,
                           imgPath: coupon.imgPath,
                           isClaimed: coupon.isClaimed,
+                          claimBOnPress: () {
+                            claimCoupon(coupon.id);
+                          },
                         );
                       },
                     )
