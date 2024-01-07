@@ -41,6 +41,11 @@ class SharePreference {
     return pref.getBool(key);
   }
 
+  static logout() async {
+    final pref = await SharedPreferences.getInstance();
+    pref.clear();
+  }
+
 
 
 }

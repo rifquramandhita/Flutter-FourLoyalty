@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:four_loyalty/ui/commingsoon/commingsoon_page.dart';
 import 'package:four_loyalty/ui/mycoupons/mycoupon_page.dart';
 import 'package:four_loyalty/ui/searchcoupons/searchcoupons_page.dart';
+import 'package:four_loyalty/ui/setting/setting_page.dart';
 
 class Home_page extends StatefulWidget {
   const Home_page({super.key});
@@ -29,7 +30,7 @@ class _Home_pageState extends State<Home_page> {
   List<Widget> _widgetSelected = [
     MyCoupons_page(),
     SearchCoupons_page(),
-    CommingSoon_page(),
+    Setting_page(),
   ];
 
   @override
