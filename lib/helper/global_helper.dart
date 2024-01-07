@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class GlobalHelper{
+class Global_helper{
   static TextTheme getTheme(BuildContext context){
     return Theme.of(context)
         .textTheme

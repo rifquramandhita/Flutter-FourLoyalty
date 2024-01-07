@@ -13,7 +13,7 @@ class CommingSoon_page extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.not_interested, size: 200,),
-            Text("Comming Soon", style: GlobalHelper.getTheme(context).headlineLarge,),
+            Text("Comming Soon", style: Global_helper.getTheme(context).headlineLarge,),
           ],
         ),
       ),

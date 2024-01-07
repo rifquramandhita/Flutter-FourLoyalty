@@ -48,14 +48,14 @@ class MyCoupon_card extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: GlobalHelper.getTheme(context).titleLarge,
+                  style: Global_helper.getTheme(context).titleLarge,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
                       expAt,
-                      style: GlobalHelper.getTheme(context).bodyLarge,
+                      style: Global_helper.getTheme(context).bodyLarge,
                     ),
                   ],
                 )

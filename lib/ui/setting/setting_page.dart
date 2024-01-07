@@ -76,11 +76,11 @@ class _Setting_pageState extends State<Setting_page> {
                             Text(
                               user.name,
                               style:
-                                  GlobalHelper.getTheme(context).headlineLarge,
+                                  Global_helper.getTheme(context).headlineLarge,
                             ),
                             Text(
                               user.email,
-                              style: GlobalHelper.getTheme(context).titleLarge,
+                              style: Global_helper.getTheme(context).titleLarge,
                             )
                           ],
                         ))
@@ -111,7 +111,7 @@ class _Setting_pageState extends State<Setting_page> {
                           SharePreference.logout();
                           Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
-                                  builder: (context) => LoginPage()),
+                                  builder: (context) => Login_page()),
                               (Route<dynamic> route) => false);
                         },
                         child: Text("Logout"),

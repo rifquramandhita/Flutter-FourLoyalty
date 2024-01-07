@@ -7,14 +7,14 @@ import 'package:four_loyalty/helper/global_helper.dart';
 import 'package:four_loyalty/ui/component/loading_component.dart';
 import 'package:four_loyalty/ui/home/home_page.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class Login_page extends StatefulWidget {
+  const Login_page({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<Login_page> createState() => _Login_pageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _Login_pageState extends State<Login_page> {
   late bool isLoading;
 
   final _emailC = TextEditingController();
@@ -24,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       isLoading = true;
     });
-    final response = await AuthResource.login(_emailC.text, _passwordC.text);
+    final response = await Auth_resource.login(_emailC.text, _passwordC.text);
     if (response.success) {
       SharePreference.setString(Const.PREF_USER_TOKEN, response.token!);
       Navigator.pushReplacement(
@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
             builder: (context) => Home_page(),
           ));
     } else {
-      DialogHelper.showCustomDialog(
+      Dialog_helper.showCustomDialog(
         context,
         "Failed",
         response.message,
@@ -95,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         Text("Login",
                             style:
-                                GlobalHelper.getTheme(context).headlineLarge),
+                                Global_helper.getTheme(context).headlineLarge),
                         TextFormField(
                           controller: _emailC,
                           decoration: InputDecoration(

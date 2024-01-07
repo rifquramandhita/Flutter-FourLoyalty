@@ -1,7 +1,7 @@
 import 'package:four_loyalty/data/model/coupon_model.dart';
 import 'package:four_loyalty/data/response/base_response.dart';
 
-class Coupon_FetchAll_response extends BaseResponse {
+class Coupon_FetchAll_response extends Base_response {
   final List<Coupon_model> data;
 
   Coupon_FetchAll_response(

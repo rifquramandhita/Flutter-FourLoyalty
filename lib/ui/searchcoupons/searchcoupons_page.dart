@@ -52,7 +52,7 @@ class _SearchCoupons_pageState extends State<SearchCoupons_page> {
                   children: [
                     Text(
                       "List Coupon",
-                      style: GlobalHelper.getTheme(context).titleLarge,
+                      style: Global_helper.getTheme(context).titleLarge,
                     ),
                     ListView.builder(
                       physics: NeverScrollableScrollPhysics(),

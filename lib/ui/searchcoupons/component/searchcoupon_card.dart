@@ -51,7 +51,7 @@ class SearchCoupon_card extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: GlobalHelper.getTheme(context).titleLarge,
+                      style: Global_helper.getTheme(context).titleLarge,
                     ),
                   ],
                 ),

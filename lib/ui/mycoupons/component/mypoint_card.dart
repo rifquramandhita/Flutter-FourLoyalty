@@ -36,11 +36,11 @@ class MyPoint_card extends StatelessWidget {
                     children: [
                       Text(
                         'My Point',
-                        style: GlobalHelper.getTheme(context).titleLarge,
+                        style: Global_helper.getTheme(context).titleLarge,
                       ),
                       Text(
                         myPoint,
-                        style: GlobalHelper.getTheme(context).displayMedium,
+                        style: Global_helper.getTheme(context).displayMedium,
                       )
                     ],
                   ),

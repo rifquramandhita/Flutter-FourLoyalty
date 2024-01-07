@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class DialogHelper {
+class Dialog_helper {
   static showCustomDialog(BuildContext context, String title, String content,
       IconData icon, List<Widget> listAction) {
     showDialog(

@@ -71,12 +71,12 @@ class _MyCoupons_pageState extends State<MyCoupons_page> {
                               children: [
                                 Text(
                                   "Hello",
-                                  style: GlobalHelper.getTheme(context)
+                                  style: Global_helper.getTheme(context)
                                       .headlineSmall,
                                 ),
                                 Text(
                                   user.name,
-                                  style: GlobalHelper.getTheme(context)
+                                  style: Global_helper.getTheme(context)
                                       .headlineLarge,
                                 )
                               ],
@@ -93,7 +93,7 @@ class _MyCoupons_pageState extends State<MyCoupons_page> {
                               children: [
                                 Text(
                                   "My Coupon",
-                                  style: GlobalHelper.getTheme(context)
+                                  style: Global_helper.getTheme(context)
                                       .headlineLarge,
                                 ),
                                 SizedBox(

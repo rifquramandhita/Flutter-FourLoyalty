@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:four_loyalty/data/model/user_model.dart';
 import 'package:four_loyalty/data/response/base_response.dart';
 
-class User_FetchByEmail_response extends BaseResponse {
+class User_FetchByEmail_response extends Base_response {
   final User_model data;
 
   User_FetchByEmail_response(
