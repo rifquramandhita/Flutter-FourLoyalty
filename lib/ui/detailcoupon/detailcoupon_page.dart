@@ -78,7 +78,13 @@ class _DetailCoupon_pageState extends State<DetailCoupon_page> {
                                   ? ElevatedButton(
                                       onPressed: null, child: Text("Claimed"))
                                   : ElevatedButton(
-                                      onPressed: () {}, child: Text("Claim | ${coupon.fee} Point")),
+                                      onPressed: () {},
+                                      child:
+                                          Text("Claim | ${coupon.fee} Point"),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue,
+                                foregroundColor: Colors.white
+                              )),
                             )
                           ]),
                     ),
