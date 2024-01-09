@@ -46,6 +46,7 @@ class _SearchCoupons_pageState extends State<SearchCoupons_page> {
         TextButton(
             onPressed: () {
               Navigator.pop(context);
+              getData();
             },
             child: Text("Close"))
       ]);
