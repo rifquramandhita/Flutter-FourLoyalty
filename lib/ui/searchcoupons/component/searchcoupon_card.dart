@@ -6,6 +6,7 @@ class SearchCoupon_card extends StatelessWidget {
   final title;
   final imgPath;
   final isClaimed;
+  final fee;
   final claimBOnPress;
   final cardOnClick;
 
@@ -14,6 +15,7 @@ class SearchCoupon_card extends StatelessWidget {
       required this.title,
       required this.imgPath,
       required this.isClaimed,
+      required this.fee,
       this.claimBOnPress,
       this.cardOnClick});
 
@@ -66,7 +68,9 @@ class SearchCoupon_card extends StatelessWidget {
                     children: [
                       ElevatedButton(
                           onPressed: (isClaimed == '1') ? null : claimBOnPress,
-                          child: Text((isClaimed == '1') ? "Claimed" : "Claim"))
+                          child: Text((isClaimed == '1')
+                              ? "Claimed"
+                              : "Claim | $fee Point"))
                     ],
                   )
                 ],

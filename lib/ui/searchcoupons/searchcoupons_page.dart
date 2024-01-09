@@ -93,6 +93,7 @@ class _SearchCoupons_pageState extends State<SearchCoupons_page> {
                             title: coupon.title,
                             imgPath: coupon.imgPath,
                             isClaimed: coupon.isClaimed,
+                            fee: coupon.fee,
                             claimBOnPress: () {
                               claimCoupon(coupon.id);
                             },
