@@ -5,6 +5,7 @@ import 'package:four_loyalty/data/resource/user_resource.dart';
 import 'package:four_loyalty/data/resource/usercoupon_resource.dart';
 import 'package:four_loyalty/helper/global_helper.dart';
 import 'package:four_loyalty/ui/component/loading_component.dart';
+import 'package:four_loyalty/ui/detailcoupon/detailcoupon_page.dart';
 import 'package:four_loyalty/ui/mycoupons/component/mycoupon_card.dart';
 import 'package:four_loyalty/ui/mycoupons/component/mypoint_card.dart';
 
@@ -109,6 +110,15 @@ class _MyCoupons_pageState extends State<MyCoupons_page> {
                                       title: userCoupon.title,
                                       expAt: userCoupon.expAt,
                                       imgPath: userCoupon.imagePath,
+                                      cardOnClick: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DetailCoupon_page(
+                                                      id: userCoupon.couponId),
+                                            ));
+                                      },
                                     );
                                   },
                                 ),

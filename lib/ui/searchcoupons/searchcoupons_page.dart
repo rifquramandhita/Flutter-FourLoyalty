@@ -6,6 +6,7 @@ import 'package:four_loyalty/data/response/base_response.dart';
 import 'package:four_loyalty/helper/dialog_helper.dart';
 import 'package:four_loyalty/helper/global_helper.dart';
 import 'package:four_loyalty/ui/component/loading_component.dart';
+import 'package:four_loyalty/ui/detailcoupon/detailcoupon_page.dart';
 import 'package:four_loyalty/ui/searchcoupons/component/searchcoupon_card.dart';
 
 class SearchCoupons_page extends StatefulWidget {
@@ -89,13 +90,20 @@ class _SearchCoupons_pageState extends State<SearchCoupons_page> {
                       itemBuilder: (context, index) {
                         final coupon = listCoupon[index];
                         return SearchCoupon_card(
-                          title: coupon.title,
-                          imgPath: coupon.imgPath,
-                          isClaimed: coupon.isClaimed,
-                          claimBOnPress: () {
-                            claimCoupon(coupon.id);
-                          },
-                        );
+                            title: coupon.title,
+                            imgPath: coupon.imgPath,
+                            isClaimed: coupon.isClaimed,
+                            claimBOnPress: () {
+                              claimCoupon(coupon.id);
+                            },
+                            cardOnClick: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        DetailCoupon_page(id: coupon.id),
+                                  ));
+                            });
                       },
                     )
                   ],

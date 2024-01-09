@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:four_loyalty/data/preference/share_preference.dart';
-import 'package:four_loyalty/data/response/usercoupon_getbyuser_response.dart';
 import 'package:four_loyalty/data/response/base_response.dart';
+import 'package:four_loyalty/data/response/usercoupon_getbyuser_response.dart';
 import 'package:http/http.dart';
 
 import '../../const.dart';
