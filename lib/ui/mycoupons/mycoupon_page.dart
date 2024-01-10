@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:focus_detector/focus_detector.dart';
 import 'package:four_loyalty/data/model/user_model.dart';
 import 'package:four_loyalty/data/model/usercoupon_model.dart';
 import 'package:four_loyalty/data/resource/user_resource.dart';
@@ -52,85 +53,88 @@ class _MyCoupons_pageState extends State<MyCoupons_page> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-          child: (isLoading)
-              ? Loading_component()
-              : SingleChildScrollView(
-                  child: Stack(
-                    children: [
-                      Column(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 20, horizontal: 20),
-                            color: Colors.blue,
-                            width: double.infinity,
-                            height: 200,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Hello",
-                                  style: Global_helper.getTheme(context)
-                                      .headlineSmall,
-                                ),
-                                Text(
-                                  user.name,
-                                  style: Global_helper.getTheme(context)
-                                      .headlineLarge,
-                                )
-                              ],
+    return FocusDetector(
+      onFocusGained: initState,
+      child: Scaffold(
+        body: SafeArea(
+            child: (isLoading)
+                ? Loading_component()
+                : SingleChildScrollView(
+                    child: Stack(
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 20, horizontal: 20),
+                              color: Colors.blue,
+                              width: double.infinity,
+                              height: 200,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Hello",
+                                    style: Global_helper.getTheme(context)
+                                        .headlineSmall,
+                                  ),
+                                  Text(
+                                    user.name,
+                                    style: Global_helper.getTheme(context)
+                                        .headlineLarge,
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 50,
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(10),
-                            width: double.maxFinite,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "My Coupon",
-                                  style: Global_helper.getTheme(context)
-                                      .headlineLarge,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemCount: listUserCoupon.length,
-                                  itemBuilder: (context, index) {
-                                    final userCoupon = listUserCoupon[index];
-                                    return MyCoupon_card(
-                                      title: userCoupon.title,
-                                      expAt: userCoupon.expAt,
-                                      imgPath: userCoupon.imagePath,
-                                      cardOnClick: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DetailCoupon_page(
-                                                      id: userCoupon.couponId),
-                                            ));
-                                      },
-                                    );
-                                  },
-                                ),
-                              ],
+                            SizedBox(
+                              height: 50,
                             ),
-                          )
-                        ],
-                      ),
-                      MyPoint_card(myPoint: user.point)
-                    ],
-                  ),
-                )),
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              width: double.maxFinite,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "My Coupon",
+                                    style: Global_helper.getTheme(context)
+                                        .headlineLarge,
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount: listUserCoupon.length,
+                                    itemBuilder: (context, index) {
+                                      final userCoupon = listUserCoupon[index];
+                                      return MyCoupon_card(
+                                        title: userCoupon.title,
+                                        expAt: userCoupon.expAt,
+                                        imgPath: userCoupon.imagePath,
+                                        cardOnClick: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DetailCoupon_page(
+                                                        id: userCoupon.couponId),
+                                              ));
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                        MyPoint_card(myPoint: user.point)
+                      ],
+                    ),
+                  )),
+      ),
     );
   }
 }
