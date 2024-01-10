@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:four_loyalty/const.dart';
 import 'package:four_loyalty/data/model/coupon_model.dart';
 import 'package:four_loyalty/data/resource/coupon_resource.dart';
+import 'package:four_loyalty/data/resource/usercoupon_resource.dart';
+import 'package:four_loyalty/data/response/base_response.dart';
+import 'package:four_loyalty/helper/dialog_helper.dart';
 import 'package:four_loyalty/helper/global_helper.dart';
 import 'package:four_loyalty/ui/component/loading_component.dart';
 
@@ -30,9 +33,40 @@ class _DetailCoupon_pageState extends State<DetailCoupon_page> {
     });
   }
 
+  void claimCoupon() async {
+    setState(() {
+      isLoading = true;
+    });
+    late Base_response response;
+    await Future.wait([postClaim().then((value) => response = value)]);
+
+    if (response.success) {
+      getData();
+    } else {
+      Dialog_helper.showCustomDialog(
+          context, 'Failed', response.message, Icons.error, [
+        TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              getData();
+            },
+            child: Text("Close"))
+      ]);
+    }
+
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   Future<Coupon_model> getDetailCoupon() async {
     final response = await Coupon_resource.getById(widget.id);
     return response.data[0];
+  }
+
+  Future<Base_response> postClaim() async {
+    final response = await UserCoupon_resource.claim(widget.id);
+    return response;
   }
 
   @override
@@ -78,13 +112,14 @@ class _DetailCoupon_pageState extends State<DetailCoupon_page> {
                                   ? ElevatedButton(
                                       onPressed: null, child: Text("Claimed"))
                                   : ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        claimCoupon();
+                                      },
                                       child:
                                           Text("Claim | ${coupon.fee} Point"),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.blue,
-                                foregroundColor: Colors.white
-                              )),
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.blue,
+                                          foregroundColor: Colors.white)),
                             )
                           ]),
                     ),
