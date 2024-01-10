@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:focus_detector/focus_detector.dart';
 import 'package:four_loyalty/data/model/coupon_model.dart';
 import 'package:four_loyalty/data/resource/coupon_resource.dart';
 import 'package:four_loyalty/data/resource/usercoupon_resource.dart';
@@ -72,45 +73,48 @@ class _SearchCoupons_pageState extends State<SearchCoupons_page> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: (isLoading)
-            ? Loading_component()
-            : SingleChildScrollView(
-                padding: EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    Text(
-                      "List Coupon",
-                      style: Global_helper.getTheme(context).titleLarge,
-                    ),
-                    ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: listCoupon.length,
-                      itemBuilder: (context, index) {
-                        final coupon = listCoupon[index];
-                        return SearchCoupon_card(
-                            title: coupon.title,
-                            imgPath: coupon.imgPath,
-                            isClaimed: coupon.isClaimed,
-                            fee: coupon.fee,
-                            claimBOnPress: () {
-                              claimCoupon(coupon.id);
-                            },
-                            cardOnClick: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        DetailCoupon_page(id: coupon.id),
-                                  ));
-                            });
-                      },
-                    )
-                  ],
+    return FocusDetector(
+      onFocusGained: initState,
+      child: Scaffold(
+        body: SafeArea(
+          child: (isLoading)
+              ? Loading_component()
+              : SingleChildScrollView(
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                    children: [
+                      Text(
+                        "List Coupon",
+                        style: Global_helper.getTheme(context).titleLarge,
+                      ),
+                      ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: listCoupon.length,
+                        itemBuilder: (context, index) {
+                          final coupon = listCoupon[index];
+                          return SearchCoupon_card(
+                              title: coupon.title,
+                              imgPath: coupon.imgPath,
+                              isClaimed: coupon.isClaimed,
+                              fee: coupon.fee,
+                              claimBOnPress: () {
+                                claimCoupon(coupon.id);
+                              },
+                              cardOnClick: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          DetailCoupon_page(id: coupon.id),
+                                    ));
+                              });
+                        },
+                      )
+                    ],
+                  ),
                 ),
-              ),
+        ),
       ),
     );
   }
