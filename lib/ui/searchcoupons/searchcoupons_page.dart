@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:focus_detector/focus_detector.dart';
 import 'package:four_loyalty/data/model/coupon_model.dart';
 import 'package:four_loyalty/data/resource/coupon_resource.dart';
+import 'package:four_loyalty/data/resource/user_resource.dart';
 import 'package:four_loyalty/data/resource/usercoupon_resource.dart';
 import 'package:four_loyalty/data/response/base_response.dart';
 import 'package:four_loyalty/helper/dialog_helper.dart';
 import 'package:four_loyalty/helper/global_helper.dart';
 import 'package:four_loyalty/ui/component/loading_component.dart';
 import 'package:four_loyalty/ui/detailcoupon/detailcoupon_page.dart';
+import 'package:four_loyalty/ui/searchcoupons/component/mypoint_card.dart';
 import 'package:four_loyalty/ui/searchcoupons/component/searchcoupon_card.dart';
 
 class SearchCoupons_page extends StatefulWidget {
@@ -20,13 +22,14 @@ class SearchCoupons_page extends StatefulWidget {
 class _SearchCoupons_pageState extends State<SearchCoupons_page> {
   late bool isLoading;
   late List<Coupon_model> listCoupon;
+  late String myPoint;
 
   void getData() async {
     setState(() {
       isLoading = true;
     });
 
-    await Future.wait([getAllCoupon()]);
+    await Future.wait([getAllCoupon(), getMyPoint().then((value) => myPoint = value)]);
 
     setState(() {
       isLoading = false;
@@ -59,6 +62,11 @@ class _SearchCoupons_pageState extends State<SearchCoupons_page> {
     listCoupon = response.data;
   }
 
+  Future<String> getMyPoint() async{
+    final response = await User_resource.fetchMyPoint();
+    return response.data;
+}
+
   Future<Base_response> postClaim(String couponId) async {
     final response = await UserCoupon_resource.claim(couponId);
     return response;
@@ -83,6 +91,7 @@ class _SearchCoupons_pageState extends State<SearchCoupons_page> {
                   padding: EdgeInsets.all(10),
                   child: Column(
                     children: [
+                      MyPoint_card(myPoint: myPoint),
                       Text(
                         "List Coupon",
                         style: Global_helper.getTheme(context).titleLarge,
