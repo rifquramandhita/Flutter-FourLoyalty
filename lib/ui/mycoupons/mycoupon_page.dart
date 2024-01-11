@@ -8,7 +8,7 @@ import 'package:four_loyalty/helper/global_helper.dart';
 import 'package:four_loyalty/ui/component/loading_component.dart';
 import 'package:four_loyalty/ui/detailcoupon/detailcoupon_page.dart';
 import 'package:four_loyalty/ui/mycoupons/component/mycoupon_card.dart';
-import 'package:four_loyalty/ui/mycoupons/component/mypoint_card.dart';
+import 'package:four_loyalty/ui/mycoupons/component/amountcoupon_card.dart';
 
 class MyCoupons_page extends StatefulWidget {
   const MyCoupons_page({super.key});
@@ -130,7 +130,7 @@ class _MyCoupons_pageState extends State<MyCoupons_page> {
                             )
                           ],
                         ),
-                        MyPoint_card(myPoint: user.point)
+                        AmountCoupon_card(amount: listUserCoupon.length.toString())
                       ],
                     ),
                   )),

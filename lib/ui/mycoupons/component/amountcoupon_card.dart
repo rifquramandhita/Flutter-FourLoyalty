@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:four_loyalty/helper/global_helper.dart';
 
-class MyPoint_card extends StatelessWidget {
-  final myPoint;
+class AmountCoupon_card extends StatelessWidget {
+  final amount;
 
-  const MyPoint_card({super.key, required this.myPoint});
+  const AmountCoupon_card({super.key, required this.amount});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class MyPoint_card extends StatelessWidget {
                       borderRadius: BorderRadius.circular(100)),
                   width: 75,
                   height: 75,
-                  child: Icon(Icons.account_balance_wallet,
+                  child: Icon(Icons.discount,
                       size: 50, color: Colors.blue),
                 ),
                 Expanded(
@@ -35,11 +35,11 @@ class MyPoint_card extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'My Point',
+                        'Amount Coupon',
                         style: Global_helper.getTheme(context).titleLarge,
                       ),
                       Text(
-                        myPoint,
+                        amount,
                         style: Global_helper.getTheme(context).displayMedium,
                       )
                     ],
